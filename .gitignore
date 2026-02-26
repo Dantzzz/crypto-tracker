@@ -1,0 +1,16 @@
+# Local database and logs
+data/*.db
+data/*.sqlite
+logs/
+
+# Secrets
+.env
+
+# Python artifacts
+__pycache__/
+*.pyc
+.DS_Store
+
+# Virtual Environment
+venv/
+.venv/
