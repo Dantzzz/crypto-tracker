@@ -1,0 +1,18 @@
+api:
+  base_url: "https://api.coingecko.com/api/v3"
+  currency: "usd"
+  assets:
+    - id: "bitcoin"
+      symbol: "BTC"
+    - id: "cardano"
+      symbol: "ADA"
+
+scheduler:
+  interval_minutes: 30
+
+database:
+  path: "data/crypto_prices.db"
+  table_name: "price_snapshots"
+
+logging:
+  path: "logs/pipeline.log"
