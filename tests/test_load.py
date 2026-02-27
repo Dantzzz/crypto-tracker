@@ -1,6 +1,6 @@
 import sqlite3
 import unittest
-from src.load import initialize_database, insert_records
+from src.load import init_db, insert_records
 
 
 MOCK_RECORDS = [
@@ -8,12 +8,11 @@ MOCK_RECORDS = [
     {"date": "2026-02-26", "time": "21:00:00", "symbol": "ADA", "price": 0.29}
 ]
 
-
 class TestLoad(unittest.TestCase):
 
     def setUp(self):
         self.conn = sqlite3.connect(":memory:")
-        initialize_database(self.conn, "price_snapshots")
+        init_db(self.conn, "price_snapshots")
 
     def tearDown(self):
         self.conn.close()
@@ -41,10 +40,9 @@ class TestLoad(unittest.TestCase):
     def test_initialize_is_idempotent(self):
         # Running initialize twice should not raise an error or wipe data
         insert_records(self.conn, "price_snapshots", MOCK_RECORDS)
-        initialize_database(self.conn, "price_snapshots")
+        init_db(self.conn, "price_snapshots")
         cursor = self.conn.execute("SELECT COUNT(*) FROM price_snapshots")
         self.assertEqual(cursor.fetchone()[0], 2)
-
 
 if __name__ == "__main__":
     unittest.main()
