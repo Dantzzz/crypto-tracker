@@ -15,3 +15,11 @@ def initialize_database(conn: sqlite3.Connection, table_name: str) -> None:
         )
     """)
     conn.commit()
+
+def insert_records(conn: sqlite3.Connection, table_name: str, records: list[dict]) -> None:
+    cursor = conn.cursor()
+    cursor.executemany(f"""
+        INSERT INTO {table_name} (date, time, symbol, price)
+        VALUES (:date, :time, :symbol, :price) 
+    """, records)
+    conn.commit()
