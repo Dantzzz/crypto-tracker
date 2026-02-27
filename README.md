@@ -13,8 +13,30 @@ An automated ETL pipeline that collects real-time price snapshots for Bitcoin (B
 
 ## Project Structure
 
+```bash
+crypto-tracker/
+├── config/
+│   └── config.yaml       # Pipeline configuration
+├── data/                 # SQLite database (gitignored)
+├── logs/                 # Pipeline logs (gitignored)
+├── src/
+│   ├── extract.py        # Fetch data from CoinGecko API
+│   ├── transform.py      # Reshape raw data into target schema
+│   └── load.py           # Write records to SQLite
+├── tests/
+│   ├── test_extract.py
+│   ├── test_transform.py
+│   └── test_load.py
+├── main.py               # Runs one full ETL cycle
+├── scheduler.py          # Runs pipeline on a timed interval
+├── Dockerfile
+└── requirements.txt
+```
 
 ## Requirements
+
+- Python 3.12+
+- Docker (for containerized runs)
 
 ## Local Setup
 
@@ -71,6 +93,10 @@ CREATE TABLE price_snapshots (
 ```
 
 ## Testing
+
+```bash
+python3 -m unittest discover tests
+```
 
 ## Roadmap
 
