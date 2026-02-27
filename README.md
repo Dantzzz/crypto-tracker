@@ -1,6 +1,6 @@
 # Simple Crypto Price Tracker
 
-An automated ETL pipeline project that captures real-time price snapshots for Bitcoin (BTC) and Cardano (ADA) using the CoinGecko API. The application structures and stores the data in a PostgreSQL database. The project is highly configurable and fully containerized with Docker.
+An automated ETL pipeline project that captures real-time price snapshots for Bitcoin (BTC) and Cardano (ADA) using the CoinGecko API. The application structures and stores the data in a PostgreSQL database. The project is highly customizable and fully containerized with Docker.
 ## Features
 
 - Fetches live crypto prices every 30 minutes via the CoinGecko free API.
