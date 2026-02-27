@@ -11,7 +11,10 @@ scheduler:
   interval_min: 30
 
 database:
-  path: "data/crypto_prices.db"
+  host: "localhost"
+  port: 5432
+  name: "crypto_tracker"
+  user: "crypto_user"
   table_name: "price_snapshots"
 
 logging:

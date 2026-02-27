@@ -4,6 +4,12 @@ FROM python:3.12-slim
 # Set working directory inside container
 WORKDIR /app
 
+# Ensure output is sent to terminal
+ENV PYTHONUNBUFFERED=1
+
+# Required for psycopg2
+RUN apt-get update && apt-get install -y libpq-dev && rm -rf /var/lib/apt/lists/*
+
 # Copy requirements file and install dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
@@ -13,9 +19,6 @@ COPY . .
 
 # Create directories in case not exist in image
 RUN mkdir -p data logs
-
-# Ensure output is sent to terminal
-ENV PYTHONUNBUFFERED=1
 
 # Run scheduler when container starts
 CMD ["python", "scheduler.py"]
