@@ -14,11 +14,9 @@ def setup_logging(log_path: str) -> None:
         ]
     )
 
-def run_etl(config:dict) -> None:
-    db_path = config["database"]["path"]
+def run_etl(config: dict) -> None:
     table = config["database"]["table_name"]
     log_path = config["logging"]["path"]
-
     setup_logging(log_path)
     logger = logging.getLogger(__name__)
 
@@ -31,7 +29,7 @@ def run_etl(config:dict) -> None:
         records = transform_prices(raw, config)
         logger.info(f"Transformed {len(records)} records.\n")
 
-        conn = get_conn(db_path)
+        conn = get_conn(config)
         init_db(conn, table)
         insert_records(conn, table, records)
         conn.close()
